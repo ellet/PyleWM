@@ -23,6 +23,12 @@ def filters(added_filters):
     CONFIG_FILTERS += added_filters
 
 def get_config_dir():
+    expanded_XDG_home = os.path.expandvars(r"%XDG_CONFIG_HOME%")
+    expanded_default_home = os.path.expandvars(r"%USERPROFILE%\.config")
+    config_loc = os.path.join(os.getenv(expanded_XDG_home, expanded_default_home), "PyleWM")
+    if os.path.isdir(config_loc):
+        return config_loc
+
     return os.path.expandvars(r"%APPDATA%\PyleWM")
 
 def apply():
