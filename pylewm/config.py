@@ -32,7 +32,12 @@ def get_config_dir():
 def apply(direct_config_path):
     global DIRECT_CONFIG_PATH
 
-    if direct_config_path and os.path.isfile(direct_config_path):
+    if direct_config_path:
+        if not os.path.isfile(direct_config_path) and os.path:
+            print("Error: " + direct_config_path + " does not exist")
+            direct_config_path = None
+
+    if direct_config_path:
         config_file = direct_config_path
     else:
         config_dir = get_config_dir()
