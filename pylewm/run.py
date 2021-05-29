@@ -59,8 +59,12 @@ def start():
         # Set up registry variables for running PyleWM correctly
         init_registry_vars()
 
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--config")
+    args = parser.parse_args()
+
     faulthandler.enable()
-    pylewm.config.apply()
+    pylewm.config.apply(args.config)
 
     for fun in InitFunctions:
         fun()

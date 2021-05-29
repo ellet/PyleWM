@@ -9,6 +9,8 @@ import shutil
 CONFIG_HOTKEYS = {}
 CONFIG_FILTERS = []
 
+DIRECT_CONFIG_PATH = None
+
 def apply_default_config():
     import pylewm.pylewm_default_config
     pylewm.pylewm_default_config.apply()
@@ -25,13 +27,18 @@ def filters(added_filters):
 def get_config_dir():
     return os.path.expandvars(r"%APPDATA%\PyleWM")
 
-def apply():
-    config_dir = get_config_dir()
-    config_file = os.path.join(config_dir, "PyleWM_Config.py")
+def apply(direct_config_path):
+    if isinstance(direct_config_path, str) and os.path.isfile(direct_config_path):
+        config_file = direct_config_path
+    else:
+        # Create config folder if one doesn't exist
+        config_dir = get_config_dir()
+        if not os.path.isdir(config_dir):
+            os.makedirs(config_dir)
+        config_file = os.path.join(config_dir, "PyleWM_Config.py")
 
-    # Create config folder if one doesn't exist
-    if not os.path.isdir(config_dir):
-        os.makedirs(config_dir)
+    global DIRECT_CONFIG_PATH
+    DIRECT_CONFIG_PATH = config_file
 
     # Copy default config if one doesn't exist
     if not os.path.isfile(config_file):
