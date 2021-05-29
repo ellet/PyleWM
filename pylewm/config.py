@@ -35,8 +35,8 @@ def apply(direct_config_path):
     if isinstance(direct_config_path, str) and os.path.isfile(direct_config_path):
         config_file = direct_config_path
     else:
-        # Create config folder if one doesn't exist
         config_dir = get_config_dir()
+        # Create config folder if one doesn't exist
         if not os.path.isdir(config_dir):
             os.makedirs(config_dir)
         config_file = os.path.join(config_dir, "PyleWM_Config.py")
