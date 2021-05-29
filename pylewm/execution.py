@@ -90,7 +90,7 @@ def this_pc(cwd=None):
 
 @PyleCommand.Threaded
 def open_config(cwd=None):
-    file_explorer(os.path.dirname(pylewm.config.DIRECT_CONFIG_PATH)).run()
+    file_explorer(pylewm.config.get_config_dir()).run()
 
 class STARTUPINFO(ctypes.Structure):
     _fields_ = (
