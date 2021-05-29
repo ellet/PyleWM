@@ -60,7 +60,7 @@ def start():
         init_registry_vars()
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("--config")
+    parser.add_argument("--config", help="Specify the location of a specific config file to use. Defaults to %%APPDATA%%\\PyleWM\\PyleWM_Config.py")
     args = parser.parse_args()
 
     faulthandler.enable()
