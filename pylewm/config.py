@@ -25,14 +25,14 @@ def filters(added_filters):
     CONFIG_FILTERS += added_filters
 
 def get_config_dir():
-    if isinstance(DIRECT_CONFIG_PATH, str):
+    if DIRECT_CONFIG_PATH:
         return os.path.dirname(DIRECT_CONFIG_PATH)
     return os.path.expandvars(r"%APPDATA%\PyleWM")
 
 def apply(direct_config_path):
     global DIRECT_CONFIG_PATH
 
-    if isinstance(direct_config_path, str) and os.path.isfile(direct_config_path):
+    if direct_config_path and os.path.isfile(direct_config_path):
         config_file = direct_config_path
     else:
         config_dir = get_config_dir()
